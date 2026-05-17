@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import * as XLSX from 'xlsx';
 import Layout from '../components/Layout';
 import { useReferrals } from '../contexts/ReferralContext';
 import type { Referral } from '../types';
@@ -12,6 +13,24 @@ export default function SpecialistLogbook() {
     setExpandedLogs((current) => 
       current.includes(key) ? current.filter((k) => k !== key) : [...current, key]
     );
+  };
+
+  const handleDownload = () => {
+    const data = referrals.map((ref, index) => ({
+      'S.No': index + 1,
+      'Referring Doctor': ref.referredByDoctorName || 'N/A',
+      'Doctor Phone': ref.referredByDoctorPhone || 'N/A',
+      'Patient Name': ref.patientName,
+      'Patient Phone': ref.phoneNumber,
+      'Urgency': ref.urgency,
+      'Status': ref.status,
+      'Created At': new Date(ref.createdAt).toLocaleDateString(),
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Logbook');
+    XLSX.writeFile(workbook, `Dental_Logbook_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   const logBook = useMemo(() => {
@@ -32,7 +51,18 @@ export default function SpecialistLogbook() {
     <Layout title="Doctor Logbook" subtitle="View referral ledgers grouped by referring doctor.">
       <div className="space-y-6">
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">Referral Ledger</p>
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">Referral Ledger</p>
+            <button
+              onClick={handleDownload}
+              className="flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition-all"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download Logbook (.xlsx)
+            </button>
+          </div>
           <div className="mt-4 space-y-4">
             {logBook.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
