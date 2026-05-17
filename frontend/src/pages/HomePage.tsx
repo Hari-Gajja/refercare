@@ -91,7 +91,6 @@ export default function HomePage() {
         patientName,
         phoneNumber: patientPhone,
         issueDescription,
-        urgency: 'Medium',
         files: [],
         referredByDoctorId: doctorId,
       });

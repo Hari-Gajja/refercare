@@ -10,7 +10,6 @@ export interface User {
 }
 
 export type ReferralStatus = 'Referred' | 'In Progress' | 'Completed';
-export type Urgency = 'Low' | 'Medium' | 'High';
 
 export type UserRef = {
   _id: string;
@@ -33,7 +32,6 @@ export interface Referral {
   age?: number;
   phoneNumber: string;
   issueDescription: string;
-  urgency: Urgency;
   files: string[];
   status: ReferralStatus;
   feedback?: string;

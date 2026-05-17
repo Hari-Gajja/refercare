@@ -22,7 +22,6 @@ export default function SpecialistLogbook() {
       'Doctor Phone': ref.referredByDoctorPhone || 'N/A',
       'Patient Name': ref.patientName,
       'Patient Phone': ref.phoneNumber,
-      'Urgency': ref.urgency,
       'Status': ref.status,
       'Created At': new Date(ref.createdAt).toLocaleDateString(),
     }));

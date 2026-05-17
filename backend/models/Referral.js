@@ -5,11 +5,6 @@ const referralSchema = new mongoose.Schema({
   age: { type: Number },
   phoneNumber: { type: String, required: true },
   issueDescription: { type: String, required: true },
-  urgency: {
-    type: String,
-    enum: ['Low', 'Medium', 'High'],
-    default: 'Medium',
-  },
   files: [{ type: String }],
   referredByDoctorId: {
     type: mongoose.Schema.Types.ObjectId,

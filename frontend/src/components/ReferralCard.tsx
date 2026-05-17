@@ -55,10 +55,6 @@ export default function ReferralCard({ referral, actions, compact = false }: Ref
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Issue</p>
           <p className="text-sm text-slate-700">{referral.issueDescription}</p>
         </div>
-        <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Urgency</p>
-          <p className="text-sm font-semibold text-slate-700">{referral.urgency}</p>
-        </div>
         {!compact && (
           <>
             {referral.referredByDoctorName && (
