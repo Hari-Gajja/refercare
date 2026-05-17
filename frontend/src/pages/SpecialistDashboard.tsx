@@ -54,10 +54,10 @@ export default function SpecialistDashboard() {
                 >
                   View History
                 </Link>
-                {(referral.status === 'Referred' || referral.status === 'Accepted' || referral.status === 'In Progress') && (
+                {(referral.status === 'Referred' || referral.status === 'In Progress') && (
                   <CallPatientButton phone={referral.phoneNumber} />
                 )}
-                {(referral.status === 'Referred' || referral.status === 'Accepted') && (
+                {referral.status === 'Referred' && (
                   <button
                     className="rounded-xl border border-slate-200 bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
                     onClick={() => handleInProgress(referral)}

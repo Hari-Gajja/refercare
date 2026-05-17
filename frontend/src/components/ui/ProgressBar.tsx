@@ -25,7 +25,7 @@ export default function ProgressBar({ status }: ProgressBarProps) {
       </div>
       <div className="h-2 w-full rounded-full bg-slate-200">
         <div
-          className={`h-2 rounded-full transition-all ${status === 'Rejected' ? 'bg-rose-500' : 'bg-emerald-500'}`}
+          className="h-2 rounded-full bg-emerald-500 transition-all"
           style={{ width: `${progress}%` }}
         />
       </div>

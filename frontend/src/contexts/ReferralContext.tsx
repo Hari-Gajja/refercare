@@ -26,7 +26,7 @@ export function ReferralProvider({ children }: { children: React.ReactNode }) {
     }
     setLoading(true);
     try {
-      const data = await listReferrals(user);
+      const data = await listReferrals();
       setReferrals(data);
     } finally {
       setLoading(false);

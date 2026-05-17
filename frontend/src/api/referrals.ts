@@ -31,7 +31,7 @@ const writeReferrals = (items: Referral[]) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 };
 
-export const listReferrals = async (user: User): Promise<Referral[]> => {
+export const listReferrals = async (): Promise<Referral[]> => {
   if (useMockApi()) {
     await wait(getMockDelay());
     const data = readReferrals();
